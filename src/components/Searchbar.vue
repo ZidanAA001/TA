@@ -1,8 +1,11 @@
 <template>
-    <div class="pb-5 flex justify-end">
+    <div class="pb-5 flex justify-end space-x-2">
+        <button data-modal-target="crud-modal" type="submit" @click="" class="p-2.5 h-10 text-xs font-bold text-white bg-primary rounded-lg border border-primary hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-primary dark:hover:bg-green-600 dark:focus:ring-green-700">
+              <fa icon="fas fa-plus" />
+              </button>
         <form class="flex items-center" @submit.prevent="toggleSearch">   
             <button type="submit" class="p-2.5 text-xs font-bold text-white bg-primary rounded-lg border border-primary hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-primary dark:hover:bg-green-600 dark:focus:ring-green-700">
-                <fa icon="" />
+                <fa icon="magnifying-glass" />
                 <span class="sr-only">Search</span>
             </button>
     <label for="simple-search" class="sr-only">Search</label>
@@ -19,24 +22,24 @@
 </template>
 
 <script lang="ts">
-import { Datas } from '../stores/dataMaster'
-import { onMounted } from 'vue';
+import { useDivStore } from '../stores/divStore';
 
-const Data = Datas()
-
-const toggleSearch = () => {
-    Data.getData().then((res:any) => {
-        Data.list = res.data
-        Data.pagination = res.links
-    })
-}
 
 export default {
     data() {
         return {
-            Data, toggleSearch
+            Data: useDivStore()
         }
-    } 
+    } ,
+    methods: {
+        toggleSearch() {
+        this.Data.getData().then((res:any) => {
+        this.Data.list = res.data.data.data
+        this. Data.pagination = res.links
+        
+    })
+}
+    }
 }
 
 </script>

@@ -7,7 +7,7 @@ const baseUrl = import.meta.env.VITE_APP_BASE_API;
 interface Data {
     list: any
     parameter: {
-        size: number
+        per_page: number
         search: string | null
         page: number
     }
@@ -30,7 +30,7 @@ export const useDivStore = defineStore('divStore', {
     state: (): Data => ({
         list: [],
         parameter: {
-          size: 5,
+          per_page: 10,
           search: null,
           page: 1,
         },   
@@ -53,10 +53,10 @@ export const useDivStore = defineStore('divStore', {
         getData() {
             return new Promise((resolve, reject) => {
                 
-                const { size, search, page } = this.parameter;
+                const { per_page, search, page } = this.parameter;
                 
                 axios.get( baseUrl + 'getanggota', {
-                    params: {size, search, page}
+                    params: {per_page, search, page}
             })
             .then((res) => {
                 resolve(res.data.data.data)
@@ -68,9 +68,9 @@ export const useDivStore = defineStore('divStore', {
     },
     postData() {
         return new Promise((resolve, reject) => {
-            const { size, search, page } = this.parameter;
+            const { per_page, search, page } = this.parameter;
             const { nm_anggota, email, alamat, no_tlp, tgl_lahir, tgl_bergabung, id_divisi, id_jabatan } = this.createUser;
-            axios.post( baseUrl + 'createanggota', {size, search, page, nm_anggota, email, alamat, no_tlp, tgl_lahir, tgl_bergabung, id_divisi, id_jabatan})
+            axios.post( baseUrl + 'createanggota', {per_page, search, page, nm_anggota, email, alamat, no_tlp, tgl_lahir, tgl_bergabung, id_divisi, id_jabatan})
             .then((res) => {
                 resolve(res.data.data);
             })
@@ -81,10 +81,10 @@ export const useDivStore = defineStore('divStore', {
     },
     putData() {
         return new Promise((resolve, reject) => {
-            const { size, search, page } = this.parameter
+            const { per_page, search, page } = this.parameter
             const { user } = this.createUser;
             const id = 2
-            axios.put( baseUrl + id , {size, search, page, user})
+            axios.put( baseUrl + id , {per_page, search, page, user})
             .then((res) => {
               resolve(res.data.data)
             })

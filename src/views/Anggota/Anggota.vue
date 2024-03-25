@@ -7,20 +7,7 @@
         </div>
       </div>
       <div class="bg-white p-5">
-        <div class="text-start mr-56">
-                        <button @click="toggleModal" styling="text-xs text-primary border border-transparent">test</button>
-                        <!-- Modal component -->
-                        <Modal v-if="showModal">
-                            <!-- Content of your modal -->
-                            <div class="space-y-5">
-                                <h2>Kamu Lupa Password?</h2>
-                                <input title="text-xs" text="Password Baru" />
-                                <input title="text-xs" text="Konfirmasi Password Baru" />
-                                <button @click="toggleModal">close</button>
-                            </div>
-                        </Modal>
-                    </div>  
-        <Searchbar></Searchbar>
+              <Searchbar></Searchbar>
         <div>
           <ElTable :data="list" height="250" style="width: 100%">
             <ElTableColumn prop="index" label="No" width="120" />
@@ -90,7 +77,7 @@ methods:{
   async getData() {
     try {
       this.store.getData().then((res:any) => {
-      this.list = res
+      this.list = res.value
     })
     
   } catch (error) {

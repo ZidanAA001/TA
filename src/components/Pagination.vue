@@ -7,10 +7,10 @@
                 </li>
             </ul>
             <ul class="inline-flex -space-x-px text-sm mr-4">
-                <select v-model="divStore.parameter.size" @change="changeSize" class="bg-gray-700 border border-gray-600 text-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 block w-full">
-                    <option value="5">5</option>
+                <select v-model="divStore.parameter.per_page" @change="changeSize" class="bg-gray-700 border border-gray-600 text-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 block w-full">
                     <option value="10">10</option>
-                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
                     <option value="50">50</option>
                 </select>
             </ul>
@@ -29,9 +29,9 @@ export default {
     },
     methods: {
         changeSize() {
-    this.divStore.getData().then((res:any) => {
-        this.divStore.list = res.data
-        this.divStore.pagination  =  res.links
+            this.divStore.getData().then((res:any) => {
+            this.divStore.list = res.data
+            this.divStore.pagination  =  res.links
     })
 },
     TogglePagination(url: string | null, pageLabel: string) {
